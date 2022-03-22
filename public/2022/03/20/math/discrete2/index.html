@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="鱼子酱">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="深入理解集合、子集、空集、全集的表示方法、集合相等、幂集等基本概念；熟练掌握集合的并、交、补运算；能用文氏图表示集合运算；熟练掌握集合运算的基本定律，能熟练地应用这些定律证明集合恒等式；深刻理解序偶与笛卡尔积的概念；理解复合关系与逆关系的概念，掌握关系的性质，等价关系、偏序关系等的定义，了解关系的闭包的计算方法；理解函数、复合函数和逆函数的概念；了解特征函数和容斥原理。  重点和难点 集合的概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学-集合论">
+<meta property="og:url" content="http://example.com/2022/03/20/math/discrete2/index.html">
+<meta property="og:site_name" content="鱼子酱的博客">
+<meta property="og:description" content="深入理解集合、子集、空集、全集的表示方法、集合相等、幂集等基本概念；熟练掌握集合的并、交、补运算；能用文氏图表示集合运算；熟练掌握集合运算的基本定律，能熟练地应用这些定律证明集合恒等式；深刻理解序偶与笛卡尔积的概念；理解复合关系与逆关系的概念，掌握关系的性质，等价关系、偏序关系等的定义，了解关系的闭包的计算方法；理解函数、复合函数和逆函数的概念；了解特征函数和容斥原理。  重点和难点 集合的概念">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://instrument-file.oss-cn-beijing.aliyuncs.com/img/202111171523746.png">
+<meta property="article:published_time" content="2022-03-20T08:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-21T13:21:13.509Z">
+<meta property="article:author" content="鱼子酱">
+<meta property="article:tag" content="离散数学">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://instrument-file.oss-cn-beijing.aliyuncs.com/img/202111171523746.png">
+  
+  
+  <title>离散数学-集合论 - 鱼子酱的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1,"placement":"right"},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="离散数学-集合论">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      鱼子酱
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-20 16:00" pubdate>
+        星期日, 三月 20日 2022, 4:00 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">离散数学-集合论</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>深入理解集合、子集、空集、全集的表示方法、集合相等、幂集等基本概念；熟练掌握集合的并、交、补运算；能用文氏图表示集合运算；熟练掌握集合运算的基本定律，能熟练地应用这些定律证明集合恒等式；深刻理解序偶与笛卡尔积的概念；理解复合关系与逆关系的概念，掌握关系的性质，等价关系、偏序关系等的定义，了解关系的闭包的计算方法；理解函数、复合函数和逆函数的概念；了解特征函数和容斥原理。</p>
+</blockquote>
+<h3 id="重点和难点"><a href="#重点和难点" class="headerlink" title="重点和难点"></a>重点和难点</h3><ul>
+<li>集合的概念和基本运算</li>
+<li>笛卡尔积和关系的基本运算</li>
+<li>复合关系和逆关系</li>
+<li>关系的性质，等价关系与偏序关系</li>
+<li>关系的闭包（三个闭包）</li>
+<li>映射的基本概念</li>
+<li>复合映射和逆映射</li>
+</ul>
+<h4 id="1-集合的基本概念"><a href="#1-集合的基本概念" class="headerlink" title="1. 集合的基本概念"></a>1. 集合的基本概念</h4><ul>
+<li>数学理论研究概念分为两类<ul>
+<li><code>原始</code>概念：不能给出确切的定义，只能给出描述如直线。</li>
+<li><code>派生</code>概念：可以由其他概念来定义的概念，如平面几何中的正方形可以定义为临边相等的矩形。</li>
+</ul>
+</li>
+<li>集合也是一种原始概念，指具有共同性质的对象汇集成的一个整体。</li>
+<li>集合中的每一个对象称为**<code>集合的元素</code>**。</li>
+<li>通常用大写字母A,B,C…表示集合，用小写字母a，b，c…表示集合中的元素。</li>
+<li>若**<em>A</em><strong>表示一个集合，_a_是集合</strong><em>A</em><strong>中的元素记_a_∈</strong><em>A</em><strong>，读作a属于A；若_a_不是集合</strong><em>A</em><strong>中的元素记_a_∉</strong><em>A</em>**，读作啊不属于A。</li>
+<li>集合**<em>A</em><strong>的元素个数称为集合的基数或势，可以记为|</strong><em>A</em><strong>|或（#</strong><em>A</em>**）。</li>
+<li>集合的元素个数无限的集合称为<code>无穷集</code>或<code>无线集</code>，元素个数有限的集合称为<code>有穷集</code>或<code>有限集</code>。</li>
+</ul>
+<h4 id="2-集合的性质"><a href="#2-集合的性质" class="headerlink" title="2. 集合的性质"></a>2. 集合的性质</h4><ul>
+<li><code>确定性</code>：给定一个元素_a_和一个集合**<em>A</em><strong>，_a_或者属于或者不属于</strong><em>A</em>**，二者必居其一，且仅居其一。</li>
+<li><code>无序性</code>: 集合中元素的排列次序是任意的.</li>
+<li><code>互异性</code>：元素_a_在集合**<em>A</em><strong>中无论重复多少次，_a_只能看作</strong><em>A</em>**中的一个元素。</li>
+<li><code>抽象性</code>：集合中元素可以是具体的，也可以是抽象的，甚至一个集合也可以作为另一个集合的元素。</li>
+</ul>
+<h4 id="3-集合的表示方法"><a href="#3-集合的表示方法" class="headerlink" title="3. 集合的表示方法"></a>3. 集合的表示方法</h4><ul>
+<li>列举法<ul>
+<li>把集合中的所有元素–列举出来，或列出足够多的元素以及反映出集合中成员的特征，元素之间用逗号分开，并用大括号括起来。</li>
+<li>B={a,b,c,d,e,f,…,x,y,z}</li>
+</ul>
+</li>
+<li>描述法<ul>
+<li>把集合中的元素所满足的条件或具有的性质描述出来，即将条件或性质用文字或符号在花括号内竖线后面表示出来。</li>
+<li>C={x|x∈Z且3&lt;x≤6} ,即C={4,5,6}</li>
+</ul>
+</li>
+<li>文氏图法<ul>
+<li>用一个大的矩形表示全集U（最大的集合–所涉及的全部集合都是这个集合的子集），在矩形中花一些圆或其它的几何图形来表示集合，有时也用一些点来表示集合的特定元素。</li>
+<li>集合A={1，2，3} 文氏图法如下图↓<br>  <img src="https://instrument-file.oss-cn-beijing.aliyuncs.com/img/202111171523746.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+</li>
+<li>递归法 <ul>
+<li>通过计算规则定义集合中的元素。首先给出该集合的初始元素；然后给出由集合中已知元素构造其他元素的方法；最后有限次使用前面的步骤得到元素是集合中的元素。</li>
+<li>斐波那契数列：a0=1，a1=1，an=an-1+an-2</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-集合间的关系"><a href="#4-集合间的关系" class="headerlink" title="4. 集合间的关系"></a>4. 集合间的关系</h4><ol>
+<li>子集<blockquote>
+<p><code>子集</code>定义：给定两个集合**<em>A</em><strong>和</strong><em>B</em><strong>，若</strong><em>A</em><strong>中的<code>任意</code>元素都属于</strong><em>B</em><strong>，则称</strong><em>A</em><strong>是</strong><em>B</em><strong>的<code>子集</code>，或称</strong><em>A</em><strong>包含于</strong><em>B</em><strong>，或称</strong><em>B</em><strong>包含</strong><em>A</em><strong>，通常基座</strong><em>A</em><strong>⊆</strong><em>B</em><strong>,或</strong><em>B</em><strong>⊇</strong><em>A</em>**.</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>集合A={1,2,3,4,5},B={1,3},C={1,3,5}则有B⊆A，C⊆A，B⊆C</li>
+</ul>
+<ol start="2">
+<li>集合相等<blockquote>
+<p><code>集合相等</code>定义：如果两个集合**<em>A</em><strong>和</strong><em>B</em><strong>的元素完全相同，则称这两个集合<code>完全相等</code>，记</strong><em>A</em><strong>=</strong><em>B</em>**</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>A={1,2,3,4},B={4,3,2,1} A=B</li>
+<li>性质：<ul>
+<li><code>自反性</code>：对于任意集合**<em>A</em><strong>，均为</strong><em>A</em><strong>⊆</strong><em>A</em>**。</li>
+<li><code>反对称性</code>：对于任意集合**<em>A</em><strong>和</strong><em>B</em><strong>，若</strong><em>A</em><strong>⊆</strong><em>B</em><strong>且</strong><em>B</em><strong>⊆</strong><em>A</em><strong>，则</strong><em>A</em><strong>=</strong><em>B</em>**。</li>
+<li><code>传递性</code>：对于任意集合**<em>A</em><strong>，</strong><em>B</em><strong>和</strong><em>C</em><strong>，若</strong><em>A</em><strong>⊆</strong><em>B</em><strong>，</strong><em>B</em><strong>⊆</strong><em>C</em><strong>，则</strong><em>A</em><strong>⊆</strong><em>C</em>**</li>
+</ul>
+</li>
+<li>定理：对于任意两个集合**<em>A</em><strong>，</strong><em>B</em><strong>，</strong><em>A</em><strong>=</strong><em>B</em><strong>的充要条件是</strong><em>A</em><strong>⊆</strong><em>B</em><strong>且</strong><em>B</em><strong>⊆</strong><em>A</em>**</li>
+</ul>
+<ol start="3">
+<li>真子集<blockquote>
+<p>定义：如果集合**<em>A</em><strong>是集合</strong><em>B</em>** 的子集，但**<em>A</em><strong>和</strong><em>B</em><strong>不相等，也就是说</strong><em>B</em><strong>中至少有一个元素不属于</strong><em>A</em><strong>，则称</strong><em>A</em><strong>是</strong><em>B</em><strong>的<code>真子集</code>，也称</strong><em>B</em><strong>真包含</strong><em>A</em><strong>，或</strong><em>A</em><strong>真包含于</strong><em>B</em><strong>，记作</strong><em>A</em><strong>⊂</strong><em>B</em><strong>或</strong><em>B</em><strong>⊃</strong><em>A</em>**</p>
+</blockquote>
+</li>
+<li>全集<blockquote>
+<p>定义：在一个具体问题中，如果涉及的集合都是某个集合的子集，则这个集合称为<code>全集</code>或<code>论域</code>，记作**<em>U</em><strong>或（</strong><em>E</em>**）</p>
+</blockquote>
+</li>
+<li>空集<blockquote>
+<p>定义：不含任何元素的集合，称为<code>空集</code>，记为**<code>∅</code>**，有时也用<code>&#123;&#125;</code>来表示。</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>定理：空集是一切集合的子集。即对于任意的集合**<em>A</em><strong>,均有<code>∅ ⊆</code></strong><em><code>A</code></em>**</li>
+<li>定理：空集是唯一的</li>
+</ul>
+<ol start="6">
+<li>幂集<blockquote>
+<p>定义：设**<em>A</em><strong>是集合，</strong><em>A</em><strong>的所有子集构成的集合称为</strong><em>A</em>**的<code>幂集</code>，记作<code>p(A)</code>或<code>2</code><sup class="normal"><code>A</code></sup></p>
+</blockquote>
+</li>
+<li>平凡子集<blockquote>
+<p>定义：对任意集合**<em>A</em><strong>，有∅ ∈</strong><em>p(A)</em><strong>和</strong><em>A</em><strong>∈</strong><em>p(A)</em><strong>，在</strong><em>A</em><strong>的所有子集中，</strong><em>A</em><strong>和</strong><em>∅</em>**这两个子集又叫<code>平凡子集</code></p>
+</blockquote>
+</li>
+<li>定理：设**<em>A</em><strong>是个有限集且|</strong><em>A</em><strong>|=n，则</strong><em>p(A)</em>**=2<sup class="normal">n</sup></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/20/math/discrete1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">离散数学-集合的基本运算</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/20/math/math/">
+                        <span class="hidden-mobile">数学</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
