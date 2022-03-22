@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/project/img/fluid.png">
+  <link rel="icon" href="/project/img/fluid.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="深入理解集合、子集、空集、全集的表示方法、集合相等、幂集等基本概念；熟练掌握集合的并、交、补运算；能用文氏图表示集合运算；熟练掌握集合运算的基本定律，能熟练地应用这些定律证明集合恒等式；深刻理解序偶与笛卡尔积的概念；理解复合关系与逆关系的概念，掌握关系的性质，等价关系、偏序关系等的定义，了解关系的闭包的计算方法；理解函数、复合函数和逆函数的概念；了解特征函数和容斥原理。  重点和难点 集合的概念">
 <meta property="og:type" content="article">
 <meta property="og:title" content="离散数学-集合论">
-<meta property="og:url" content="http://example.com/2022/03/20/math/discrete2/index.html">
+<meta property="og:url" content="https://aninch0ftime.github.io/project/2022/03/20/math/discrete2/index.html">
 <meta property="og:site_name" content="鱼子酱的博客">
 <meta property="og:description" content="深入理解集合、子集、空集、全集的表示方法、集合相等、幂集等基本概念；熟练掌握集合的并、交、补运算；能用文氏图表示集合运算；熟练掌握集合运算的基本定律，能熟练地应用这些定律证明集合恒等式；深刻理解序偶与笛卡尔积的概念；理解复合关系与逆关系的概念，掌握关系的性质，等价关系、偏序关系等的定义，了解关系的闭包的计算方法；理解函数、复合函数和逆函数的概念；了解特征函数和容斥原理。  重点和难点 集合的概念">
 <meta property="og:locale" content="zh_CN">
@@ -62,17 +62,17 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
 
-<link  rel="stylesheet" href="/css/main.css" />
+<link  rel="stylesheet" href="/project/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1,"placement":"right"},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"aninch0ftime.github.io","root":"/project/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1,"placement":"right"},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/project/local-search.xml"};
   </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
+  <script  src="/project/js/utils.js" ></script>
+  <script  src="/project/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.1"></head>
 
 
@@ -80,7 +80,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/project/">
       <strong>Fluid</strong>
     </a>
 
@@ -99,7 +99,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/project/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -111,7 +111,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/project/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -123,7 +123,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/project/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -135,7 +135,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/project/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -147,7 +147,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/project/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -159,7 +159,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/project/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
               </a>
@@ -185,7 +185,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/project/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -315,7 +315,7 @@
 </li>
 <li>文氏图法<ul>
 <li>用一个大的矩形表示全集U（最大的集合–所涉及的全部集合都是这个集合的子集），在矩形中花一些圆或其它的几何图形来表示集合，有时也用一些点来表示集合的特定元素。</li>
-<li>集合A={1，2，3} 文氏图法如下图↓<br>  <img src="https://instrument-file.oss-cn-beijing.aliyuncs.com/img/202111171523746.png" srcset="/img/loading.gif" lazyload></li>
+<li>集合A={1，2，3} 文氏图法如下图↓<br>  <img src="https://instrument-file.oss-cn-beijing.aliyuncs.com/img/202111171523746.png" srcset="/project/img/loading.gif" lazyload></li>
 </ul>
 </li>
 <li>递归法 <ul>
@@ -387,9 +387,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                      <a class="hover-with-bg" href="/project/categories/%E6%95%B0%E5%AD%A6/">数学</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+                      <a class="hover-with-bg" href="/project/categories/%E6%95%B0%E5%AD%A6/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
                     
                   </div>
                 
@@ -397,7 +397,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+                      <a class="hover-with-bg" href="/project/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
                     
                   </div>
                 
@@ -414,7 +414,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/20/math/discrete1/">
+                      <a href="/project/2022/03/20/math/discrete1/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">离散数学-集合的基本运算</span>
                         <span class="visible-mobile">上一篇</span>
@@ -424,7 +424,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/20/math/math/">
+                      <a href="/project/2022/03/20/math/math/">
                         <span class="hidden-mobile">数学</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -518,18 +518,18 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script  src="/project/js/events.js" ></script>
+<script  src="/project/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
 
-  <script  src="/js/local-search.js" ></script>
+  <script  src="/project/js/local-search.js" ></script>
 
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
+    <script  src="/project/js/img-lazyload.js" ></script>
   
 
 
@@ -582,7 +582,7 @@
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
+<script  src="/project/js/boot.js" ></script>
 
 
 </body>
