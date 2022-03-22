@@ -103,7 +103,10 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/AnInch0fTime/AnInch0fTime.github.io
+  branch: master
+  message: 
 
 encrypt:
   enable: true
