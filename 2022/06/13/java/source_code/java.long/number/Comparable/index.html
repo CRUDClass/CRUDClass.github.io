@@ -1,0 +1,726 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="空白">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Comparable类的概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Comparable类">
+<meta property="og:url" content="https://118.31.73.110/blog/2022/06/13/java/source_code/java.long/number/Comparable/index.html">
+<meta property="og:site_name" content="空白的博客">
+<meta property="og:description" content="Comparable类的概述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-13T08:16:00.000Z">
+<meta property="article:modified_time" content="2022-06-13T08:16:00.000Z">
+<meta property="article:author" content="空白">
+<meta property="article:tag" content="java.long">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Comparable类 - 空白的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"118.31.73.110","root":"/blog/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"a4832b75f24dc23a2f31ec936a6a963a","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?a4832b75f24dc23a2f31ec936a6a963a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start --><meta name="google-site-verification" content="Zdq6tPFF6fuWZCeOsLeS1KCkT0MOFN1LfutRF236emU" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Comparable类"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        空白
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-13 16:16" pubdate>
+          星期一, 六月 13日 2022, 4:16 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Comparable类</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>public：公开的</li>
+<li>interface：接口</li>
+<li><code>&lt;T&gt;</code>：泛型</li>
+</ul>
+<h2 id="自述"><a href="#自述" class="headerlink" title="自述"></a>自述</h2><p>这个接口对实现它的每个类的对象施加了一个总的排序。这个排序被称为该类的自然排序，而该类的compareTo方法被称为其自然比较方法。<br>实现该接口的对象的 <strong>List</strong>（和 <strong>Arrays</strong> ）可以通过<br> <code>Collections.sort</code>（和 <code>Arrays.sort</code> ）自动进行排序。实现该接口的对象可以被用作 <code> sorted map</code> 中的键或 <code>orted set</code> 中的元素，而不需要指定 <code>comparator</code> 。<br>当且仅当 <code>e1.compareTo(e2) == 0与e1.e2</code> 的布尔值相同时，类C的自然排序被称为与 <code>equals</code> 一致。 <strong>注意 :null不是任何类的实例，即使e.compareTo(null)返回false，也应该抛出NullPointerException。</strong><br>强烈建议自然排序与 <code>equals</code> 一致。这是因为没有显式比较器的排序集（和排序图）在与自然排序与等值不一致的元素（或键）一起使用时表现得很 “奇怪”。特别是，这样的排序集（或排序图）违反了集合（或地图）的一般契约，该契约是以 <code>equals</code> 来定义的。<br>例如，如果在一个没有使用显式比较器的排序集上添加两个键a和b，使得 <strong>(!a.equals(b) &amp;&amp; a.compareTo(b) == 0)</strong> ，第二次添加操作会返回false（而且排序集的大小不会增加），因为从排序集的角度来看，a和b是相等的。<br>几乎所有实现了Comparable的Java核心类都有与等值一致的自然排序。一个例外是java.math.BigDecimal，它的自然排序使BigDecimal对象的值相等而精度不同（如4.0和4.00）。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="compareTo"><a href="#compareTo" class="headerlink" title="compareTo"></a>compareTo</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T o)</span>;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Params：o - 被比较的对象。</li>
+<li>Returns：负整数、零或正整数，因为该对象小于、等于或大于指定对象。</li>
+<li>Throws<ul>
+<li>NullPointerException - 如果指定的对象是空的</li>
+<li>ClassCastException - 如果指定对象的类型使其不能与此对象进行比较</li>
+</ul>
+</li>
+</ul>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>将此对象与指定的对象进行顺序比较。如果此对象小于、等于或大于指定对象，则返回一个负整数、零或正整数。实现者必须确保 <code>sgn(x.compareTo(y)) == -sgn(y.compareTo(x))</code>  对于所有的 <code>x</code> 和 <code>y</code> 。实现者还必须确保关系是传递性的：（ <code>x.compareTo(y)&gt;0 &amp;&amp; y.compareTo(z)&gt;0</code> ）意味着 <code>x.compareTo(z)&gt;0</code> 。最后，实现者必须确保 <strong>x.compareTo(y)==0</strong> 意味着 <code>sgn(x.compareTo(z))==sgn(y.compareTo(z))</code> ，对于所有的 <code>z</code>。强烈建议， <code>(x.compareTo(y)==0) == (x.equals(y))</code> 。一般来说，任何实现了可比较接口的类，如果违反了这个条件，就应该明确指出这个事实。推荐的语言是 “注意：这个类的自然排序与equals不一致”。在前面的描述中，符号<code>sgn(expression)</code>指定了数学上的<code>signum</code>函数，它被定义为根据表达式的值是负的、零的还是正的，返回-1、0或1中的一个。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>自定义对象通过实现这个接口就可以通过<code>Collections.sort</code>（和 <code>Arrays.sort</code> ）自动进行排序。</p>
+<h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.crudclass.data.citation;  <br>  <br><span class="hljs-comment">/**  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@descriptions</span>: 用户  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@classname</span>: User  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span>: CRUDClass.com  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date</span>: 2022/6/11 14:00  </span><br><span class="hljs-comment"> */</span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Comparable</span>&lt;User&gt; &#123;  <br>  <br>    <span class="hljs-comment">/** 姓名 */</span>  <br>    <span class="hljs-keyword">private</span> String name;  <br>  <br>    <span class="hljs-comment">/** 年龄 */</span>  <br>    <span class="hljs-keyword">private</span> Integer age;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">(String name, Integer age)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.name = name;  <br>        <span class="hljs-built_in">this</span>.age = age;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> name;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.name = name;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">getAge</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> age;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setAge</span><span class="hljs-params">(Integer age)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.age = age;  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;User&#123;&quot;</span> +  <br>                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +  <br>                <span class="hljs-string">&quot;, age=&quot;</span> + age +  <br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(User o)</span> &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.age - o.getAge();  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Main"><a href="#Main" class="headerlink" title="Main"></a>Main</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.crudclass.data.citation;  <br>  <br><span class="hljs-keyword">import</span> java.util.*;  <br>  <br><span class="hljs-comment">/**  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@descriptions</span>:  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@classname</span>: CitationClass  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span>: LiWenBo  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date</span>: 2022/6/11 9:59  </span><br><span class="hljs-comment"> */</span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;  <br>  <br>        List&lt;User&gt; users = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();  <br>  <br>        users.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张一&quot;</span>, <span class="hljs-number">66</span>));  <br>        users.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">88</span>));  <br>        users.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张五&quot;</span>, <span class="hljs-number">55</span>));  <br>        users.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张七&quot;</span>, <span class="hljs-number">44</span>));  <br>        users.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张久&quot;</span>, <span class="hljs-number">22</span>));  <br>  <br>        System.out.println(<span class="hljs-string">&quot;排序前=&quot;</span> + users.toString());  <br>        Collections.sort(users);  <br>        System.out.println(<span class="hljs-string">&quot;排序后=&quot;</span> + users.toString());  <br>  <br>        User[] users1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>[]&#123;  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张一&quot;</span>, <span class="hljs-number">66</span>),  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">88</span>),  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张五&quot;</span>, <span class="hljs-number">55</span>),  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张七&quot;</span>, <span class="hljs-number">44</span>),  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张久&quot;</span>, <span class="hljs-number">22</span>)  <br>        &#125;;  <br>  <br>        System.out.println(<span class="hljs-string">&quot;排序前=&quot;</span> + Arrays.toString(users1));  <br>        Arrays.sort(users1);  <br>        System.out.println(<span class="hljs-string">&quot;排序后=&quot;</span> + Arrays.toString(users1));  <br>  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs txt">排序前=[User&#123;name=&#x27;张一&#x27;, age=66&#125;, User&#123;name=&#x27;张三&#x27;, age=88&#125;, User&#123;name=&#x27;张五&#x27;, age=55&#125;, User&#123;name=&#x27;张七&#x27;, age=44&#125;, User&#123;name=&#x27;张久&#x27;, age=22&#125;]<br>排序后=[User&#123;name=&#x27;张久&#x27;, age=22&#125;, User&#123;name=&#x27;张七&#x27;, age=44&#125;, User&#123;name=&#x27;张五&#x27;, age=55&#125;, User&#123;name=&#x27;张一&#x27;, age=66&#125;, User&#123;name=&#x27;张三&#x27;, age=88&#125;]<br>排序前=[User&#123;name=&#x27;张一&#x27;, age=66&#125;, User&#123;name=&#x27;张三&#x27;, age=88&#125;, User&#123;name=&#x27;张五&#x27;, age=55&#125;, User&#123;name=&#x27;张七&#x27;, age=44&#125;, User&#123;name=&#x27;张久&#x27;, age=22&#125;]<br>排序后=[User&#123;name=&#x27;张久&#x27;, age=22&#125;, User&#123;name=&#x27;张七&#x27;, age=44&#125;, User&#123;name=&#x27;张五&#x27;, age=55&#125;, User&#123;name=&#x27;张一&#x27;, age=66&#125;, User&#123;name=&#x27;张三&#x27;, age=88&#125;]<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/blog/categories/Java/Java%E6%BA%90%E7%A0%81/" class="category-chain-item">Java源码</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/java-long/">#java.long</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Comparable类</div>
+      <div>https://118.31.73.110/blog/2022/06/13/java/source_code/java.long/number/Comparable/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>空白</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>星期一, 六月 13日 2022, 4:16 下午</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/07/22/docker/docker_compose/" title="Docker-Compose">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker-Compose</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/06/13/java/source_code/java.long/number/Number/" title="Number类">
+                        <span class="hidden-mobile">Number类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+  <script defer src="/blog/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<!-- require APlayer -->
+<link defer rel="stylesheet" href="/css/APlayer.min.css" />
+<script src="/js/aplayer/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="/js/aplayer/Meting.min.js"></script>
+<meting-js
+	server="netease"
+	type="playlist"
+	id="831845871"
+  fixed="true"
+  >
+</meting-js>
+<style type="text/css">
+.aplayer.aplayer-fixed{
+	max-width: 100% !important;
+}
+.aplayer.aplayer-fixed .aplayer-body {
+	max-width: 100% !important;
+	z-index: -1 !important;
+}
+
+</style>
+<script defer src="/js/limitation/limitation.js"></script><!-- hexo injector body_end end --></body>
+</html>

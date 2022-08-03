@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="空白">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Object类的概述1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Object类 1">
+<meta property="og:url" content="https://118.31.73.110/blog/2022/06/13/java/source_code/java.long/object/Object/index.html">
+<meta property="og:site_name" content="空白的博客">
+<meta property="og:description" content="Object类的概述1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-13T08:16:00.000Z">
+<meta property="article:modified_time" content="2022-06-13T08:16:00.000Z">
+<meta property="article:author" content="空白">
+<meta property="article:tag" content="java.long">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Object类 1 - 空白的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"118.31.73.110","root":"/blog/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"a4832b75f24dc23a2f31ec936a6a963a","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?a4832b75f24dc23a2f31ec936a6a963a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start --><meta name="google-site-verification" content="Zdq6tPFF6fuWZCeOsLeS1KCkT0MOFN1LfutRF236emU" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Object类 1"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        空白
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-13 16:16" pubdate>
+          星期一, 六月 13日 2022, 4:16 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          7.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          60 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Object类 1</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Object</span> &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>public：公开的</li>
+<li><strong>自</strong>：JDK1.0</li>
+</ul>
+<h2 id="自述"><a href="#自述" class="headerlink" title="自述"></a>自述</h2><p>Class Object is the root of the class hierarchy. Every class has Object as a <strong>superclass</strong>. All objects, including arrays, implement the methods of this class.</p>
+<p>类Object是类层次结构的根。<strong>每个类都有Object作为超类。所有的对象，包括数组，都实现这个类的方法</strong> 。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="registerNatives"><a href="#registerNatives" class="headerlink" title="registerNatives()"></a>registerNatives()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">registerNatives</span><span class="hljs-params">()</span>;  <br><span class="hljs-keyword">static</span> &#123;  <br>    registerNatives();  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>private：私有的</li>
+<li>static：静态的</li>
+<li>native：该方法在外部定义</li>
+</ul>
+<h3 id="getClass"><a href="#getClass" class="headerlink" title="getClass()"></a>getClass()</h3><blockquote>
+<p>返回此Object的运行时类。返回的Class对象是被代表类的静态同步方法锁定的对象。实际的结果类型是 <code>Class&lt;? extends |X|&gt;</code> ，其中 <code>|X|</code>是被调用 <code>getClass</code> 的表达式的静态类型的擦除。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">native</span> Class&lt;?&gt; getClass();<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>public：公开的</li>
+<li>final：方法不能被继承</li>
+<li>native：该方法在外部定义</li>
+</ul>
+<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h3><blockquote>
+<p>返回该对象的哈希代码值。支持这个方法是为了让哈希表受益，比如java.util.HashMap提供的哈希表。hashCode的一般契约是：</p>
+<ul>
+<li>在一个Java应用程序的执行过程中，只要对同一个对象调用多次<strong>hashCode</strong>方法就必须一致地返回相同的整数，前提是对象上的<strong>equals</strong>比较信息没有被修改。这个整数不需要在一个应用程序的一个执行过程中和同一个应用程序的另一个执行过程中保持一致。</li>
+<li>如果根据<strong>equals(Object)</strong> 方法，两个对象是相等的，那么在两个对象上分别调用<strong>hashCode</strong>方法必须产生相同的整数结果。</li>
+<li>如果两个对象根据<strong>equals(Object)</strong> 方法是不相等的，那么在这两个对象上调用hashCode方法必须产生不同的整数结果，这一点并不要求。然而，程序员应该知道，为不相等的对象产生不同的整数结果可能会提高哈希表的性能。  </li>
+</ul>
+<p>在合理可行的情况下，由Object类定义的hashCode方法确实为不同的对象返回不同的整数。(这通常是通过将对象的内部地址转换为整数来实现的，但这种实现技术并不是Java™编程语言所要求的）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">native</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hashCode</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>public：公开的</li>
+<li>native：该方法在外部定义</li>
+<li>Returns：返回<code>int</code>值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();  <br>System.out.println(o.hashCode());<br><br><span class="hljs-comment">// 结果460141958</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="equals-Object-obj"><a href="#equals-Object-obj" class="headerlink" title="equals(Object obj)"></a>equals(Object obj)</h3><blockquote>
+<p>表示其他对象是否 “等于 “这个对象。<strong>equals</strong>方法实现了对非空对象引用的等价关系。</p>
+<ul>
+<li>它是自反性的：对于任何非空的参考值<em>x</em>，<strong>x.equals(x)</strong> 应该返回<strong>true</strong>。</li>
+<li>它是对称性的：对于任何非空的参考值<strong>x</strong>和<strong>y</strong>，当且仅当<strong>y.equals(x)</strong> 返回<strong>true</strong>时，<strong>x.equals(y)</strong> 应该返回<strong>true</strong>。</li>
+<li>它是传递性的：对于任何非空参考值<strong>x</strong>、<strong>y</strong>和<strong>z</strong>，如果<strong>x.equals(y)</strong> 返回<strong>true</strong>，<strong>y.equals(z)</strong> 返回<strong>true</strong>，那么<strong>x.equals(z)</strong> 应该返回<strong>true</strong>。</li>
+<li>它是一致性的：对于任何非空的参考值x和y，如果在对象上的等价比较中使用的信息没有被修改，那么多次调用x.equals(y)会一致地返回<strong>true</strong>或一致地返回<strong>false</strong>。</li>
+<li>对于任何非空的引用值<strong>x</strong>，<strong>x.equals(null)</strong> 应该返回<strong>false</strong>。</li>
+</ul>
+<p>请注意，一般来说，只要重写了<code>hashCode</code>方法，就必须重写这个方法，这样才能保持<code>hashCode</code>方法的一般契约，即相等的对象必须有相等的哈希代码。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object obj)</span> &#123;  <br>    <span class="hljs-keyword">return</span> (<span class="hljs-built_in">this</span> == obj);  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>public：公开的</li>
+<li>Params：obj - 与之比较的参考对象</li>
+<li>Returns：返回布尔值 <strong>true / false</strong></li>
+</ul>
+<h4 id="示例-equals-Object-obj"><a href="#示例-equals-Object-obj" class="headerlink" title="示例-equals(Object obj)"></a>示例-equals(Object obj)</h4><p>User</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.crudclass.data.citation;  <br>  <br><span class="hljs-comment">/**  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@descriptions</span>: 用户  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@classname</span>: User  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span>: LiWenBo  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date</span>: 2022/6/11 14:00  </span><br><span class="hljs-comment"> */</span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;  <br>  <br>  <br>    <span class="hljs-comment">/** 姓名 */</span>  <br>    <span class="hljs-keyword">private</span> String name;  <br>  <br>    <span class="hljs-comment">/** 年龄 */</span>  <br>    <span class="hljs-keyword">private</span> Integer age;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">(String name, Integer age)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.name = name;  <br>        <span class="hljs-built_in">this</span>.age = age;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> name;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.name = name;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">getAge</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> age;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setAge</span><span class="hljs-params">(Integer age)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.age = age;  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;User&#123;&quot;</span> +  <br>                <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +  <br>                <span class="hljs-string">&quot;, age=&quot;</span> + age +  <br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Main</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.crudclass.data.citation;  <br>  <br><span class="hljs-keyword">import</span> java.util.*;  <br>  <br><span class="hljs-comment">/**  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@descriptions</span>:  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@classname</span>: CitationClass  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span>: LiWenBo  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date</span>: 2022/6/11 9:59  </span><br><span class="hljs-comment"> */</span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CitationClass</span> &#123;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;  <br>  <br>        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">18</span>);  <br>        <span class="hljs-type">User</span> <span class="hljs-variable">user1</span> <span class="hljs-operator">=</span> user;  <br>        <span class="hljs-type">User</span> <span class="hljs-variable">user2</span> <span class="hljs-operator">=</span> user1;  <br>        <span class="hljs-comment">// 自反性</span><br>        System.out.println(user.equals(user));   <span class="hljs-comment">// true</span><br>        <span class="hljs-comment">// 对称性</span><br>        System.out.println(user.equals(user1));  <span class="hljs-comment">// true</span><br>        System.out.println(user1.equals(user));  <span class="hljs-comment">// true</span><br>        <span class="hljs-comment">// 传递性</span><br>        System.out.println(user1.equals(user2)); <span class="hljs-comment">// true</span><br>        System.out.println(user.equals(user2));  <span class="hljs-comment">// true</span><br>        <span class="hljs-comment">// 一致性</span><br>        System.out.println(user.equals(user1));  <span class="hljs-comment">// true</span><br>        <span class="hljs-comment">// 对于任何非空的引用值x，x.equals(null)应该返回false。</span><br>        System.out.println(user.equals(<span class="hljs-literal">null</span>));   <span class="hljs-comment">// false</span><br>  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h3><blockquote>
+<p>创建并返回此对象的一个副本。”复制 “的确切含义可能取决于对象的类别。对于任何对象x</p>
+<ul>
+<li>x.clone() != x，是真的</li>
+<li>x.clone().getClass() == x.getClass()，是真的，但这些并不是绝对的要求。</li>
+<li>x.clone().equals(x)，将会是真的，这不是一个绝对的要求</li>
+</ul>
+<p>按照惯例，返回的对象应该通过调用<strong>super.clone</strong>来获得。如果一个类和它的所有超类（除了<strong>Object</strong>）都遵守这个惯例，那么<strong>x.clone().getClass() == x.getClass()</strong> 的情况就会出现。根据惯例，这个方法返回的对象应该独立于这个对象（被克隆的）。为了实现这种独立性，可能需要在返回之前修改<strong>super.clone</strong>返回的对象的一个或多个字段。通常情况下，这意味着复制任何构成被克隆对象内部 “深层结构 “的可变对象，并将这些对象的引用替换为对副本的引用。如果一个类只包含原始字段或对不可变对象的引用，那么通常情况下，由super.clone返回的对象中没有字段需要被修改。<strong>Object</strong>类的<strong>clone</strong>方法执行了一个特殊的克隆操作。首先，如果这个对象的类没有实现<strong>Cloneable</strong>接口，那么会抛出一个<strong>CloneNotSupportedException</strong>。请注意，所有的<strong>数组都被认为实现了Cloneable接口</strong>，数组类型<strong>T[]</strong> 的克隆方法的返回类型是<strong>T[]<strong>，其中</strong>T</strong>是任何引用或原始类型。否则，这个方法会创建一个这个对象的类的新实例，并用这个对象的相应字段的内容来初始化它的所有字段，就像通过赋值一样；字段的内容本身不会被克隆。因此，这个方法执行了这个对象的 “浅拷贝”，而不是 “深拷贝 “操作。<strong>Object</strong>类本身并没有实现<strong>Cloneable</strong>接口，所以在一个类为<strong>Object</strong>的对象上调用<strong>clone</strong>方法会导致在运行时抛出一个异常。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">native</span> Object <span class="hljs-title function_">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>protected：半公开的</li>
+<li>native：该方法在外部定义</li>
+<li>Returns：该实例的一个克隆</li>
+<li>Throws：<strong>CloneNotSupportedException</strong> - 如果该对象的类不实现<strong>Cloneable</strong>接口。重写克隆方法的子类也可以抛出这个异常，以表明一个实例不能被克隆。</li>
+</ul>
+<h4 id="示例-clone"><a href="#示例-clone" class="headerlink" title="示例-clone()"></a>示例-clone()</h4><p>User</p>
+<p>新增如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 实现接口</span><br><span class="hljs-keyword">implements</span> <span class="hljs-title class_">Cloneable</span><br><br><span class="hljs-comment">// 添加如下</span><br><span class="hljs-comment">/** 我的车 */</span>  <br><span class="hljs-keyword">private</span> Car car;<br><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">(String name, Integer age, Car car)</span> &#123;  <br>    <span class="hljs-built_in">this</span>.name = name;  <br>    <span class="hljs-built_in">this</span>.age = age;  <br>    <span class="hljs-built_in">this</span>.car = car;  <br>&#125;<br><br><span class="hljs-keyword">public</span> Car <span class="hljs-title function_">getCar</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-keyword">return</span> car;  <br>&#125;  <br>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setCar</span><span class="hljs-params">(Car car)</span> &#123;  <br>    <span class="hljs-built_in">this</span>.car = car;  <br>&#125;<br><br><span class="hljs-comment">/** 浅拷贝 */</span><br><span class="hljs-meta">@Override</span>  <br><span class="hljs-keyword">public</span> User <span class="hljs-title function_">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;  <br>    <span class="hljs-keyword">return</span> (User) <span class="hljs-built_in">super</span>.clone();  <br>&#125;  <br><span class="hljs-comment">// 修改toString方法</span><br><span class="hljs-meta">@Override</span>  <br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;  <br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;User&#123;&quot;</span> +  <br>            <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +  <br>            <span class="hljs-string">&quot;, age=&quot;</span> + age +  <br>            <span class="hljs-string">&quot;, car=&quot;</span> + car.toString() +  <br>            <span class="hljs-string">&#x27;&#125;&#x27;</span>;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Car</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.crudclass.data.citation;  <br>  <br><span class="hljs-comment">/**  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@descriptions</span>: 车  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@classname</span>: Car  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span>: LiWenBo  </span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date</span>: 2022/6/11 16:13  </span><br><span class="hljs-comment"> */</span><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> &#123;  <br>  <br>    <span class="hljs-comment">/** 车辆牌号 */</span>  <br>    <span class="hljs-keyword">private</span> String brand;  <br>  <br>    <span class="hljs-comment">/** 车型号 */</span>  <br>    <span class="hljs-keyword">private</span> String model;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Car</span><span class="hljs-params">(String brand, String model)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.brand = brand;  <br>        <span class="hljs-built_in">this</span>.model = brand;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getBrand</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> brand;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBrand</span><span class="hljs-params">(String brand)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.brand = brand;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getModel</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> model;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setModel</span><span class="hljs-params">(String model)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.model = model;  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Car&#123;&quot;</span> + <span class="hljs-string">&quot;brand=&#x27;&quot;</span> + brand + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> + <span class="hljs-string">&quot;, model=&#x27;&quot;</span> + model + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> + <span class="hljs-string">&#x27;&#125;&#x27;</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Main</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// main 方法如下变更</span><br><span class="hljs-type">Car</span> <span class="hljs-variable">car</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>(<span class="hljs-string">&quot;蒙A 99999&quot;</span>, <span class="hljs-string">&quot;宝马M3&quot;</span>);  <br>  <br><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-number">18</span>, car);  <br><span class="hljs-type">User</span> <span class="hljs-variable">user1</span> <span class="hljs-operator">=</span> (User) user.clone();  <br>  <br>System.out.println(<span class="hljs-string">&quot;user= &quot;</span> + user.toString());    <span class="hljs-comment">// user= User&#123;name=&#x27;张三&#x27;, age=18, car=Car&#123;brand=&#x27;蒙A 99999&#x27;, model=&#x27;蒙A 99999&#x27;&#125;&#125;</span><br>System.out.println(<span class="hljs-string">&quot;user1= &quot;</span> + user1.toString());  <span class="hljs-comment">// user1= User&#123;name=&#x27;张三&#x27;, age=18, car=Car&#123;brand=&#x27;蒙A 99999&#x27;, model=&#x27;蒙A 99999&#x27;&#125;&#125;</span><br>user.setName(<span class="hljs-string">&quot;张四&quot;</span>);  <br>user.setAge(<span class="hljs-number">19</span>);  <br>car.setBrand(<span class="hljs-string">&quot;吉A 11111&quot;</span>);  <br>car.setModel(<span class="hljs-string">&quot;奥迪A7&quot;</span>);  <br>System.out.println(<span class="hljs-string">&quot;user= &quot;</span> + user.toString());   <span class="hljs-comment">// user= User&#123;name=&#x27;张四&#x27;, age=19, car=Car&#123;brand=&#x27;吉A 11111&#x27;, model=&#x27;奥迪A7&#x27;&#125;&#125;</span><br>System.out.println(<span class="hljs-string">&quot;user1= &quot;</span> + user1.toString()); <span class="hljs-comment">// user1= User&#123;name=&#x27;张三&#x27;, age=18, car=Car&#123;brand=&#x27;吉A 11111&#x27;, model=&#x27;奥迪A7&#x27;&#125;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h5><ul>
+<li><p>方式一<br>  Car类实现拷贝方法，修改User类<code>clone()</code>如下</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span>  <br><span class="hljs-keyword">public</span> User <span class="hljs-title function_">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;  <br><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> (User) <span class="hljs-built_in">super</span>.clone();  <br>user.setCar(<span class="hljs-built_in">this</span>.car.clone());  <br><span class="hljs-keyword">return</span> user;  <br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>方式二<br>  修改User类<code>clone()</code>如下</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span>  <br><span class="hljs-keyword">public</span> User <span class="hljs-title function_">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;  <br><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> (User) <span class="hljs-built_in">super</span>.clone();  <br>user.setCar(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>(<span class="hljs-built_in">this</span>.getCar().getBrand(),<span class="hljs-built_in">this</span>.getCar().getModel()));  <br><span class="hljs-keyword">return</span> user;  <br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>输出变为<br>user= User{name=’张三’, age=18, car=Car{brand=’蒙A 99999’, model=’蒙A 99999’}}<br>user1= User{name=’张三’, age=18, car=Car{brand=’蒙A 99999’, model=’蒙A 99999’}}<br>user= User{name=’张四’, age=19, car=Car{brand=’吉A 11111’, model=’奥迪A7’}}<br>user1= User{name=’张三’, age=18, car=Car{brand=’蒙A 99999’, model=’蒙A 99999’}}  </p>
+<h3 id="Object1"><a href="#Object1" class="headerlink" title="[[Object1]]"></a>[[Object1]]</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/blog/categories/Java/Java%E6%BA%90%E7%A0%81/" class="category-chain-item">Java源码</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/java-long/">#java.long</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Object类 1</div>
+      <div>https://118.31.73.110/blog/2022/06/13/java/source_code/java.long/object/Object/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>空白</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>星期一, 六月 13日 2022, 4:16 下午</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/06/13/java/source_code/java.long/number/Number/" title="Number类">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Number类</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/06/13/java/source_code/java.long/object/Object1/" title="Object类 2">
+                        <span class="hidden-mobile">Object类 2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+  <script defer src="/blog/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<!-- require APlayer -->
+<link defer rel="stylesheet" href="/css/APlayer.min.css" />
+<script src="/js/aplayer/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="/js/aplayer/Meting.min.js"></script>
+<meting-js
+	server="netease"
+	type="playlist"
+	id="831845871"
+  fixed="true"
+  >
+</meting-js>
+<style type="text/css">
+.aplayer.aplayer-fixed{
+	max-width: 100% !important;
+}
+.aplayer.aplayer-fixed .aplayer-body {
+	max-width: 100% !important;
+	z-index: -1 !important;
+}
+
+</style>
+<script defer src="/js/limitation/limitation.js"></script><!-- hexo injector body_end end --></body>
+</html>

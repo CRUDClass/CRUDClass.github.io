@@ -1,0 +1,878 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/fluid.png">
+  <link rel="icon" href="/blog/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="空白">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础三">
+<meta property="og:url" content="https://118.31.73.110/blog/2022/03/20/java/basic3/index.html">
+<meta property="og:site_name" content="空白的博客">
+<meta property="og:description" content="数据类型">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://instrument-file.oss-cn-beijing.aliyuncs.com/img/Start.java1.png?x-oss-process=image/resize,m_pad,w_268,h_160/watermark,type_ZmFuZ3poZW5na2FpdGk,size_10,text_aHR0cHM6Ly9hbmluY2hvZnRpbWUuZ2l0aHViLmlvLw==,color_ffffff,shadow_0,t_100,g_se,x_10,y_10">
+<meta property="article:published_time" content="2022-03-20T09:03:00.000Z">
+<meta property="article:modified_time" content="2022-03-20T09:03:00.000Z">
+<meta property="article:author" content="空白">
+<meta property="article:tag" content="Java基础">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://instrument-file.oss-cn-beijing.aliyuncs.com/img/Start.java1.png?x-oss-process=image/resize,m_pad,w_268,h_160/watermark,type_ZmFuZ3poZW5na2FpdGk,size_10,text_aHR0cHM6Ly9hbmluY2hvZnRpbWUuZ2l0aHViLmlvLw==,color_ffffff,shadow_0,t_100,g_se,x_10,y_10">
+  
+  
+  
+  <title>java基础三 - 空白的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"118.31.73.110","root":"/blog/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"a4832b75f24dc23a2f31ec936a6a963a","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?a4832b75f24dc23a2f31ec936a6a963a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start --><meta name="google-site-verification" content="Zdq6tPFF6fuWZCeOsLeS1KCkT0MOFN1LfutRF236emU" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="java基础三"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        空白
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-20 17:03" pubdate>
+          星期日, 三月 20日 2022, 5:03 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">java基础三</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><ul>
+<li>哔哩哔哩 <a target="_blank" rel="noopener" href="https://space.bilibili.com/95256449/?spm_id_from=333.999.0.0">遇见狂神说</a></li>
+<li>Java 核心技术卷一（原书第十版）</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-basic-datatypes.html">菜鸟教程</a></li>
+</ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><blockquote>
+<p>Java是一种强类型语言,必须为每一个变量声明一种类型。<br>在Java中一共有八种基本类型，其中四种整形，两种浮点类型，一种用于表示Unicode编码的字符单元的字符类型char和一种标识真值得boolean类型。</p>
+</blockquote>
+<h4 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h4><blockquote>
+<p>整型用于表示没有小数部分的数值，它允许是负数。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>储存需求</th>
+<th>取值范围</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>1 字节</td>
+<td>-128 ~ 127</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>short</td>
+<td>2 字节</td>
+<td>-32768 ~ 32767</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>int</td>
+<td>4 字节</td>
+<td>-2147483648 ~ 2147483647</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>long</td>
+<td>8 字节</td>
+<td>-9223372036854775808 ~ 9223372036854775807</td>
+<td><code>0L</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注：</p>
+<ol>
+<li>byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类型的四分之一。</li>
+<li>short 数据类型也可以像 byte 那样节省空间。一个short变量是int型变量所占空间的二分之一。</li>
+<li>“L”理论上不分大小写，但是若写成”l”容易与数字”1”混淆，不容易分辩。所以最好大写。</li>
+</ol>
+</blockquote>
+<h5 id="整型定义"><a href="#整型定义" class="headerlink" title="整型定义"></a>整型定义</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<span class="hljs-comment">// 常用 </span><br><span class="hljs-type">long</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">10L</span>;<span class="hljs-comment">// 常用</span><br><br><span class="hljs-type">short</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br><span class="hljs-type">byte</span> <span class="hljs-variable">d</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<h4 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h4><blockquote>
+<p>浮点型用于表示小数部分的数值。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>储存需求</th>
+<th>取值范围</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flot</td>
+<td>4 字节</td>
+<td>大约±3.40282347E=38F(有效数位为6~7位)</td>
+<td><code>0.0F</code></td>
+</tr>
+<tr>
+<td>double</td>
+<td>8 字节</td>
+<td>大约±1.79769313486231570E+308(有效位数为15位)</td>
+<td><code>0.0D</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注：</p>
+<ol>
+<li>float 数据类型是单精度。</li>
+<li>double 数据类型是双精度。</li>
+<li>float 在储存大型浮点数组的时候可节省内存空间。</li>
+<li>浮点数的默认类型为 double 类型。</li>
+<li>float在很少的情况下使用，如单精度数据的库，或需要存储大量数据。</li>
+<li>所有浮点数值计算都遵循IEEE 754规范。具体来说下面用于表示溢出和出错的三种特殊的浮点数值：<ul>
+<li>正无穷大</li>
+<li>负无穷大</li>
+<li>NaN(不是一个数字)<br>例如，一个正整数除以0的结果为正无穷大。计算0/0或者负数的平方根结果为NaN</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。只有32位模式有强制要求，其他都是选择性的。大部分编程语言都有提供IEEE浮点数格式与算术，但有些将其列为非必需的。例如，IEEE 754问世之前就有的C语言，有包括IEEE算术，但不算作强制要求（C语言的float通常是指IEEE单精确度，而double是指双精确度）。<br>来源：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/IEEE%20754/3869922?fr=aladdin">百度百科</a></p>
+</blockquote>
+<h5 id="浮点型定义"><a href="#浮点型定义" class="headerlink" title="浮点型定义"></a>浮点型定义</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 浮点数 表现的字长有限也是离散的存舍入误差 大约 接近但不等于</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 最好不使用浮点数比较 可以使用  BigDecimal</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">float</span> <span class="hljs-variable">e</span> <span class="hljs-operator">=</span> <span class="hljs-number">50.1F</span>;<br><span class="hljs-type">double</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> <span class="hljs-number">50.23232D</span>;<br></code></pre></td></tr></table></figure>
+
+<h4 id="Unicode和char类型"><a href="#Unicode和char类型" class="headerlink" title="Unicode和char类型"></a><code>Unicode</code>和<code>char</code>类型</h4><blockquote>
+<p>char类型原本表示单个字符，现在有些Unicode字符可以用一个char表示，另外一些Unicode字符需要用两个char表示。<br>char类型的字面量值要用单引号括起来。<br>char默认值<code>u0000</code><br>最小值是 <code>\u0000</code>（十进制等效值为 0）。<br>最大值是 <code>\uffff</code>（即为 65535）。<br>char 数据类型可以储存任何字符。<br>char类型的值可以标识为十六进制值，其范围从<code>\u0000</code>到<code>\Uffff</code>，例如：<code>\u2122</code>标识注册符号（™）还有一些特殊字符的转义序列如下</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>转义序列</th>
+<th>名称</th>
+<th>Unicode值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\b</td>
+<td>退格</td>
+<td>\u0008</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>制表</td>
+<td>\u0009</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行</td>
+<td>\u000a</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车</td>
+<td>\u000d</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>双引号</td>
+<td>\u0022</td>
+</tr>
+<tr>
+<td>&#39;</td>
+<td>单引号</td>
+<td>\u0027</td>
+</tr>
+<tr>
+<td>\</td>
+<td>反斜杠</td>
+<td>\u005c</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<p>Unicode：统一码（Unicode），也叫万国码、单一码，是计算机科学领域里的一项业界标准，包括字符集、编码方案等。Unicode是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。来源：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BB%9F%E4%B8%80%E7%A0%81/2985798?fromtitle=Unicode&fromid=750500&fr=aladdin#1">百度百科</a></p>
+</blockquote>
+<h5 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h5><ol>
+<li>Unicode转义序列会在解析代码之前。</li>
+<li>在程序中不建议使用char类型，除非确实需要处理UTF-16代码单元。最好使用字符串作为抽象数据类型处理（String类型）。</li>
+</ol>
+<h4 id="boolean类型"><a href="#boolean类型" class="headerlink" title="boolean类型"></a><code>boolean</code>类型</h4><blockquote>
+<p>boolean 类型有两个值，fals和true，用来判断逻辑条件。整型数值和布尔值不能进行相互转换。<br>boolean默认值：false。</p>
+</blockquote>
+<h4 id="进制"><a href="#进制" class="headerlink" title="进制"></a>进制</h4><h5 id="二进制"><a href="#二进制" class="headerlink" title="二进制"></a>二进制</h5><p>二进制（binary），发现者莱布尼茨，是在数学和数字电路中以2为基数的记数系统，是以2为基数代表系统的二进位制。这一系统中，通常用两个不同的符号0（代表零）和1（代表一）来表示   。数字电子电路中，逻辑门的实现直接应用了二进制，现代的计算机和依赖计算机的设备里都使用二进制。每个数字称为一个比特（Bit，Binary digit的缩写）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// java中二进制 </span><br><span class="hljs-type">int</span> <span class="hljs-variable">aa</span> <span class="hljs-operator">=</span> <span class="hljs-number">0b10</span>;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6/361457?fr=aladdin">详细信息</a></p>
+<h5 id="八进制"><a href="#八进制" class="headerlink" title="八进制"></a>八进制</h5><p>八进制，Octal，缩写OCT或O，一种以8为基数的计数法，采用0，1，2，3，4，5，6，7八个数字，逢八进1。一些编程语言中常常以数字0开始表明该数字是八进制。八进制的数和二进制数可以按位对应（八进制一位对应二进制三位），因此常应用在计算机语言中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// java中八进制</span><br><span class="hljs-type">int</span> <span class="hljs-variable">aaa</span> <span class="hljs-operator">=</span> <span class="hljs-number">010</span>;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%AB%E8%BF%9B%E5%88%B6/4230825?fr=aladdin">详细信息</a></p>
+<h5 id="十进制"><a href="#十进制" class="headerlink" title="十进制"></a>十进制</h5><p>即1.满十进一，满二十进二，以此类推……2.按权展开，第一位权为10^0，第二位10^1……以此类推，第N位10^（N-1），该数的数值等于每位位的数值*该位对应的权值之和。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// java中十进制</span><br><span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%81%E8%BF%9B%E5%88%B6/6521392?fr=aladdin">详细信息</a></p>
+<h5 id="十六进制"><a href="#十六进制" class="headerlink" title="十六进制"></a>十六进制</h5><p>十六进制（简写为hex或下标16）是一种基数为16的计数系统，是一种逢16进1的进位制。通常用数字0、1、2、3、4、5、6、7、8、9和字母A、B、C、D、E、F（a、b、c、d、e、f）表示，其中:A<del>F表示10</del>15，这些称作十六进制数字。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// java中十六进制</span><br><span class="hljs-type">int</span> <span class="hljs-variable">aaaa</span> <span class="hljs-operator">=</span> <span class="hljs-number">0x10</span>;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6/4162457?fr=aladdin">详细信息</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/blog/categories/Java/Java%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/Java%E5%9F%BA%E7%A1%80/">#Java基础</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>java基础三</div>
+      <div>https://118.31.73.110/blog/2022/03/20/java/basic3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>空白</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>星期日, 三月 20日 2022, 5:03 下午</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/2022/03/20/java/basic5/" title="java基础五">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">java基础五</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/2022/03/20/java/basic2/" title="java基础二">
+                        <span class="hidden-mobile">java基础二</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+  <script defer src="/blog/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+<!-- require APlayer -->
+<link defer rel="stylesheet" href="/css/APlayer.min.css" />
+<script src="/js/aplayer/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="/js/aplayer/Meting.min.js"></script>
+<meting-js
+	server="netease"
+	type="playlist"
+	id="831845871"
+  fixed="true"
+  >
+</meting-js>
+<style type="text/css">
+.aplayer.aplayer-fixed{
+	max-width: 100% !important;
+}
+.aplayer.aplayer-fixed .aplayer-body {
+	max-width: 100% !important;
+	z-index: -1 !important;
+}
+
+</style>
+<script defer src="/js/limitation/limitation.js"></script><!-- hexo injector body_end end --></body>
+</html>
