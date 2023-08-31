@@ -1,0 +1,2142 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../../../../img/fluid.png">
+  <link rel="icon" href="../../../../../img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zero">
+  <meta name="keywords" content="Java,JavaWeb,it,技术,alibaba,apache,spring,hexo,linux,windows">
+  
+    <meta name="description" content="Drone Runner 环境变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Drone-Runner 环境变量">
+<meta property="og:url" content="https://crudclass.github.io/2022/07/25/Drone/drone-runner-env/">
+<meta property="og:site_name" content="Zero Blog">
+<meta property="og:description" content="Drone Runner 环境变量">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://docs.drone.io/logo.svg">
+<meta property="article:published_time" content="2022-07-25T07:33:28.000Z">
+<meta property="article:modified_time" content="2022-07-25T07:33:28.000Z">
+<meta property="article:author" content="Zero">
+<meta property="article:tag" content="Drone">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://docs.drone.io/logo.svg">
+  
+  
+  
+  <title>Drone-Runner 环境变量 - Zero Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="../../../../../css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="../../../../../css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="../../../../../css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="../../../../../css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"crudclass.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"BASH"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":false,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"6abdc8f9c09cff12a022d53a026c9342","google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"PcbhiFE3sBRvw9La6ofXUvku-gzGzoHsz","app_key":"3aAwiefz0UGn7PxkSinjPXkR","server_url":"https://pcbhife3.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false},"gtag":"G-W29M82273Z"},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="../../../../../js/utils.js" ></script>
+  <script  src="../../../../../js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?6abdc8f9c09cff12a022d53a026c9342";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  <style>ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }</style>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Zero Blog" type="application/atom+xml">
+<link rel="alternate" href="rss2.xml" title="Zero Blog" type="application/rss+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="../../../../../index.html">
+      <strong>首页</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../index.html">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../../links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('../../../../../img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Drone-Runner 环境变量"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Zero
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-25 15:33" pubdate>
+          星期一, 七月 25日 2022, 3:33 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          8.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          69 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+<aside class="sidebar d-none d-xl-block" style="margin-right:-1rem;z-index:-1"><ins class="adsbygoogle" style="display:flex;justify-content:center;min-width:160px;max-width:300px;width:100%;height:600px;position:sticky;top:2rem" data-ad-client="ca-pub-4551578691414811" data-ad-slot="2874944349"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></aside>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Drone-Runner 环境变量</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="drone环境变量"><a href="#drone环境变量" class="headerlink" title="drone环境变量"></a>drone环境变量</h3><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><div class="vkr-url-wrapper">
+<style>
+.vkr-url-wrapper {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid;
+    border-color: #eee #ddd #bbb;
+    box-shadow: rgba(0,0,0,.14) 0 1px 3px;
+    margin-bottom: 10px;
+    display: flex;
+}
+.vkr-url-wrapper .desc-wrapper > hr {
+    margin: 10px 0;
+    height: 1px;
+}
+.vkr-url-wrapper .avatar {
+    width: 100px;
+    height: 100px;
+    border: solid 1px #eee;
+    box-shadow: none!important;
+    margin: 0;
+    margin-right: 10px;
+}
+.vkr-url-wrapper h2 {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.vkr-url-wrapper .desc-wrapper {
+    flex: 1;
+}
+.vkr-url-wrapper .desc-wrapper a {
+    font-size: 22px;
+    font-weight: 700;
+}
+</style>
+    
+        <a target="_blank" rel="noopener" href="https://docs.drone.io/runner/docker/configuration/reference/"><img class="avatar" src="https://docs.drone.io/logo.svg" srcset="/img/loading.gif" lazyload ></a>
+    
+    <div class="desc-wrapper">
+        <a target="_blank" rel="noopener" href="https://docs.drone.io/runner/docker/configuration/reference/">Reference Index of server configuration settings</a>
+        <hr />
+        <div class="desc">Drone is a self-service Continuous Integration platform for busy development teams.</div>
+    </div>
+</div>
+
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
+<li>文档翻译为<a target="_blank" rel="noopener" href="https://www.deepl.com/">Deepl</a>机翻。</li>
+<li>默认值：无，仅表示翻译过程中并未直接指出该环境变量的值是什么。</li>
+<li>此翻译，仅供参数。</li>
+<li>docker镜像版本为<code>drone/drone-runner-docker:1</code>下环境变量解释。</li>
+</ol>
+<h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><ol>
+<li><p>DRONE_CPU_PERIOD</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_CPU_PERIOD</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的整数值。指定CPU CFS调度器的周期，与CPU配额一起使用。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_CPU_PERIOD=100000</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_CPU_QUOTA</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_CPU_QUOTA</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的整数值。对所有管道容器施加一个CPU CFS配额。容器在节流之前，每一个CPU周期的微秒数限制。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_CPU_QUOTA=100</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_CPU_SET</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_CPU_SET</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的逗号分隔的字符串值。限制一个管道容器可以使用的特定CPU或核心。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_CPU_SET=1,3</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_CPU_SHARES</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_CPU_SHARES</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的整数值。将此标志设置为大于或小于默认值1024的值，以增加或减少管道容器的重量，并使其能够获得更大或更小比例的主机CPU周期。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_CPU_SHARES=1024</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_DEBUG</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_DEBUG</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。启用调试级别的日志记录。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_DEBUG=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_DEFER_TAIL_LOG</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_DEFER_TAIL_LOG</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。启用新的日志生命周期，以帮助防止日志被截断。在1.8.1版本中可用。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_DEFER_TAIL_LOG=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_DOCKER_CONFIG</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_DOCKER_CONFIG</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供Docker config.json文件的路径，用于从第三方系统中获取注册表的凭证。 <strong>请注意，你通常需要把这个文件从主机装入你的Docker容器。注意上面定义的配置路径应该指向容器内的文件路径。</strong></td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_DOCKER_CONFIG=/root/.docker/config.json </br> docker run –volume /root/.docker/config.json:/root/.docker/config.json</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_DOCKER_NETWORK_ID</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_DOCKER_NETWORK_ID</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。指定要创建的docker网络的名称。默认情况下，它是一个随机字符串。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_DOCKER_NETWORK_ID=named_network</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_DOCKER_STREAM_PULL</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_DOCKER_STREAM_PULL</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。禁止将Docker pull的输出写到构建日志中。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_DOCKER_STREAM_PULL=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_ENV_PLUGIN_ENDPOINT</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_ENV_PLUGIN_ENDPOINT</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供用于向外部环境变量插件发出http请求的端点。外部环境变量插件可用于从第三方系统获取自定义管道环境变量。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_ENV_PLUGIN_ENDPOINT=<code>http://1.2.3.4:3000</code></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_ENV_PLUGIN_SKIP_VERIFY</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_ENV_PLUGIN_SKIP_VERIFY</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。在向插件端点发出http请求时禁用SSL验证。这是不安全的，不推荐。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_ENV_PLUGIN_SKIP_VERIFY=false</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_ENV_PLUGIN_TOKEN</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_ENV_PLUGIN_TOKEN</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供用于验证对插件端点的http请求的秘密令牌。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_ENV_PLUGIN_TOKEN=bea26a2221fd8090ea38720fc445eca6</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_HTTP_BIND</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_HTTP_BIND</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值用于配置http监听器的端口。默认值是:3000。不建议重写这个值。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">3000</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_HTTP_BIND=:3000</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_HTTP_HOST</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_HTTP_HOST</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值，用于配置http监听器的主机名。默认值是一个空字符串。不建议设置此值。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left"><code>&quot;&quot;</code></td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_HTTP_HOST=runner.company.com:3000</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_HTTP_PROTO</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_HTTP_PROTO</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值用于配置http监听器协议。默认值是http。不建议重写这个值。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">http</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_HTTP_PROTO=http</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_LIMIT_EVENTS</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_LIMIT_EVENTS</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的逗号分隔的字符串值。提供可由该运行器处理的构建事件的白名单。这提供了一个额外的安全层，以限制该运行器可以处理的工作负载的种类。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_LIMIT_EVENTS=push,tag</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_LIMIT_REPOS</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_LIMIT_REPOS</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的逗号分隔的字符串值。配置运行器，使其只处理匹配的存储库。这提供了一个额外的安全层，可以阻止不受信任的存储库使用该运行器执行管道。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_LIMIT_REPOS=octocat/hello-world,spaceghost/*</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_LIMIT_TRUSTED</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_LIMIT_TRUSTED</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。配置运行器，使其只处理受信任的存储库。这提供了一个额外的安全层，可以阻止不受信任的存储库与该运行器一起执行管道。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_LIMIT_TRUSTED=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_MEMORY_LIMIT</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_MEMORY_LIMIT</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的整数值。单个流水线容器可以使用的最大内存量，以字节为单位配置。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_MEMORY_LIMIT=500000000</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_MEMORY_SWAP_LIMIT</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_MEMORY_SWAP_LIMIT</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的整数值。允许单个流水线容器交换到磁盘的最大内存量，以字节为单位进行配置。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_MEMORY_SWAP_LIMIT=500000000</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_NETRC_CLONE_ONLY</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_NETRC_CLONE_ONLY</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。配置运行器，使其仅在克隆步骤中注入克隆凭证。<strong>请注意，如果版本库是私有的或需要认证才能克隆，Drone 会将克隆凭证注入所有管道步骤；如果版本库是公共的，Drone 不会将凭证注入管道步骤。</strong></td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_NETRC_CLONE_ONLY=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_REGISTRY_PLUGIN_ENDPOINT</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_REGISTRY_PLUGIN_ENDPOINT</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供用于向外部注册表插件发出http请求的端点。外部注册表插件可用于从第三方系统获取注册表凭证。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_REGISTRY_PLUGIN_ENDPOINT=<code>http://1.2.3.4:3000</code></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_REGISTRY_PLUGIN_SKIP_VERIFY</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_REGISTRY_PLUGIN_SKIP_VERIFY</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。在向注册表插件端点发出http请求时禁用SSL验证。这是不安全的，不推荐。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_REGISTRY_PLUGIN_SKIP_VERIFY=false</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_REGISTRY_PLUGIN_TOKEN</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_REGISTRY_PLUGIN_TOKEN</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供用于验证对注册表插件端点的http请求的令牌。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_REGISTRY_PLUGIN_TOKEN=bea26a2221fd8090ea38720fc445eca6</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RPC_DUMP_HTTP</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RPC_DUMP_HTTP</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。启用将http请求和响应转储到日志中的功能，以便进行调试。这应该只在调试运行器和服务器之间的连接问题时启用</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RPC_DUMP_HTTP=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RPC_DUMP_HTTP_BODY</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RPC_DUMP_HTTP_BODY</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。启用将http请求和响应体转储到日志中以进行调试。这应该只在调试运行器和服务器之间的连接问题时启用。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RPC_DUMP_HTTP_BODY=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RPC_HOST</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RPC_HOST</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">必要的字符串值。定义用于连接Drone服务器的主机名（和可选端口）。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RPC_HOST=drone.company.com</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RPC_PROTO</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RPC_PROTO</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">必要的字符串值。定义用于连接Drone服务器的协议。该值必须是 http 或 https。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RPC_PROTO=https</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RPC_SECRET</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RPC_SECRET</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">必要的字符串值。提供Drone服务器用于验证http请求的共享秘密。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RPC_SECRET=bea26a2221fd8090ea38720fc445eca6</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RPC_SKIP_VERIFY</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RPC_SKIP_VERIFY</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。在向Drone服务器发出http请求时禁用SSL验证。这是不安全的，不建议使用。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RPC_SKIP_VERIFY=false</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_CAPACITY</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_CAPACITY</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的数字值。限制运行器可以执行的并发管线的数量。运行器默认执行2条并发管道。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_CAPACITY=10</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_CLONE_IMAGE</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_CLONE_IMAGE</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。覆盖用于克隆版本库的Docker镜像。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_CLONE_IMAGE=drone/git:1</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_DEVICES</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_DEVICES</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的逗号分隔的列表。提供被安装到每个管道步骤中的设备的列表。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_DEVICES=/dev/sdb</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_ENV_FILE</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_ENV_FILE</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供环境变量文件的路径，用于定义注入所有管道步骤中的全局环境变量。<a target="_blank" rel="noopener" href="https://github.com/joho/godotenv/blob/main/README.md">这里记录了环境文件的格式</a>。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_ENV_FILE=/etc/drone.conf </br> 记住要把这个文件从主机装入Docker容器。注意上面定义的配置路径应该指向容器内的文件路径。</br> docker run –volume /etc/drone.conf:/etc/drone.conf</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_ENVIRON</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_ENVIRON</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串映射。提供一组注入到每个管道步骤的全局环境变量。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_ENVIRON=foo:bar,baz:qux</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_LABELS</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_LABELS</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串映射。提供一组标签，用于将管道路由到特定机器或一组机器。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_LABELS=foo:bar,baz:qux</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_MAX_PROCS</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_MAX_PROCS</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的数字值。限制一个运行器可以为一个管道执行的并发步骤的数量。这在默认情况下是禁用的。如果你需要节制最大的并行步骤数量以防止资源耗尽，这可能是有用的。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_MAX_PROCS=10</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_NAME</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_NAME</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。设置运行器的名称。跑步者的名字存储在服务器中，可以用来追溯到一个特定的跑步者。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_NAME=ec2-43-21.us-east-1.compute.amazonaws.com</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_NETWORKS</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_NETWORKS</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的逗号分隔的列表。提供连接到每个管道步骤的Docker网络的列表。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_NETWORKS=networkA,networkB</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_PRIVILEGED_IMAGES</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_PRIVILEGED_IMAGES</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的逗号分隔的列表。提供一个默认作为特权容器启动的Docker镜像的列表。<strong>特权模式有效地授予容器对主机的根权限。请慎重使用</strong></td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_PRIVILEGED_IMAGES=plugins/docker,plugin/ecr</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_SECRETS</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_SECRETS</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串映射。提供一组全局的、命名的秘密，供所有管道使用。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_SECRETS=username:bar,password:qux</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_RUNNER_VOLUMES</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_RUNNER_VOLUMES</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的逗号分隔的列表。提供挂载到每个管道步骤中的Docker卷的列表。在下面的例子中，冒号左边的路径是主机的路径。右边的路径是你的管道容器内的路径</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_RUNNER_VOLUMES=/path/on/host:/path/in/container</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_SECRET_PLUGIN_ENDPOINT</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_SECRET_PLUGIN_ENDPOINT</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供用于向外部秘密插件发出http请求的端点。外部秘密插件（如vault）可用于从第三方系统获取秘密。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_SECRET_PLUGIN_ENDPOINT=<code>http://1.2.3.4:3000</code></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_SECRET_PLUGIN_SKIP_VERIFY</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_SECRET_PLUGIN_SKIP_VERIFY</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。在向插件端点发出http请求时禁用SSL验证。这是不安全的，不推荐。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_SECRET_PLUGIN_SKIP_VERIFY=false</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_SECRET_PLUGIN_TOKEN</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_SECRET_PLUGIN_TOKEN</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。提供用于验证对插件端点的http请求的秘密令牌。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_SECRET_PLUGIN_TOKEN=bea26a2221fd8090ea38720fc445eca6</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_TMATE_ENABLED</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_TMATE_ENABLED</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。启用使用tmate的管道容器的远程ssh访问。托管服务和自我托管服务都被支持。这个功能默认是禁用的。这个功能需要1.6.1版本的docker runner和更高版本。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">false</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_TMATE_ENABLED=true </br> 请注意，你也可以使用下面的配置参数来配置一个自我托管的tmate服务器。请参阅官方的tmate文档以了解更多关于自我托管tmate服务器的信息。</br> <code>DRONE_TMATE_ENABLED=true</code> </br> <code>DRONE_TMATE_HOST=tmate.company.com</code> </br> <code>DRONE_TMATE_PORT=2200</code> </br> <code>DRONE_TMATE_FINGERPRINT_RSA=SHA256:iL3StSCmPU+7p2IoD8y0huMXRVFIZyGFZa8r+lO3U5I</code> </br> <code>DRONE_TMATE_FINGERPRINT_ED25519=SHA256:gXLaN8IUxUMmlm/xu7M2NEFMlbUr5UORUgMi86Kh+tI</code></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_TRACE</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_TRACE</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。启用跟踪级别的日志记录。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_TRACE=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_UI_DISABLED</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_UI_DISABLED</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的布尔值。禁用运行器的用户界面。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_UI_DISABLE=true</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_UI_PASSWORD</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_UI_PASSWORD</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。设置基本认证密码，用于认证和访问网络仪表板。如果没有提供密码，网络仪表板将被禁用。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_UI_PASSWORD=root</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_UI_REALM</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_UI_REALM</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。设置用于验证和访问网络仪表板的基本认证境界。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_UI_REALM=DroneRealm</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>DRONE_UI_USERNAME</p>
+<table>
+<thead>
+<tr>
+<th align="center">描述</th>
+<th align="left">定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">环境变量</td>
+<td align="left">DRONE_UI_USERNAME</td>
+</tr>
+<tr>
+<td align="center">解释</td>
+<td align="left">可选的字符串值。设置用于验证和访问网络仪表板的基本认证用户名。</td>
+</tr>
+<tr>
+<td align="center">默认值</td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="center">示例</td>
+<td align="left">DRONE_UI_USERNAME=root</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="../../../../../categories/Drone/" class="category-chain-item">Drone</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="../../../../../tags/Drone/" class="print-no-link">#Drone</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Drone-Runner 环境变量</div>
+      <div>https://crudclass.github.io/2022/07/25/Drone/drone-runner-env/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zero</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>星期一, 七月 25日 2022, 3:33 下午</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+<div style="width:100%;display:flex;justify-content:center;margin-bottom:1.5rem"><ins class="adsbygoogle" style="display:flex;justify-content:center;max-width:845px;width:100%;height:90px" data-ad-client="ca-pub-4551578691414811" data-ad-slot="2874944349"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({}); </script></div>
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="../drone-env/" title="Drone 环境变量">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Drone 环境变量</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="../../../23/hexo/hexo4/" title="Hexo生成站点地图并提交到谷歌">
+                        <span class="hidden-mobile">Hexo生成站点地图并提交到谷歌</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      蒙ICP备2021004379号
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="../../../../../js/events.js" ></script>
+<script  src="../../../../../js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="../../../../../js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="../../../../../js/leancloud.js" ></script>
+
+  <script  src="../../../../../js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="../../../../../js/boot.js" ></script>
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4551578691414811" crossorigin="anonymous"></script>
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+	<!-- require APlayer -->
+	<link defer rel="stylesheet" href="/css/APlayer.min.css" />
+	<script src="/js/aplayer/APlayer.min.js"></script>
+	<!-- require MetingJS -->
+	<script src="/js/aplayer/Meting.min.js"></script>
+	<meting-js
+		server="netease"
+		type="playlist"
+		id="831845871"
+		fixed="true"
+		>
+	</meting-js>
+	<style type="text/css">
+	.aplayer.aplayer-fixed{
+		max-width: 21% !important;
+	}
+	.aplayer.aplayer-fixed .aplayer-body {
+		max-width: 21% !important;
+		z-index: -1 !important;
+	}
+	.aplayer-lrc {
+		width: 25% !important;
+		float: left !important;
+		margin-bottom: 3.5% !important;
+	}
+	<script defer src="/js/limitation/limitation.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
