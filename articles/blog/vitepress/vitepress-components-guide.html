@@ -6,14 +6,14 @@
     <title>VitePress 组件与数据：文章元数据获取与组件注册 | </title>
     <meta name="description" content="基于 CRUDClass Blog 实际项目，详细讲解 VitePress 中如何获取文章元数据信息，以及组件的创建、自动注册和引用方式">
     <meta name="generator" content="VitePress v2.0.0-alpha.17">
-    <link rel="preload stylesheet" href="/assets/theme.D6KajCdD.css" as="style">
+    <link rel="preload stylesheet" href="/assets/theme.D30pdIJY.css" as="style">
     <link rel="preload stylesheet" href="/vp-icons.css" as="style">
-    <script type="module" src="/assets/chunks/metadata.6d784916.js"></script>
-    <script type="module" src="/assets/app.B3cmLYL4.js"></script>
+    <script type="module" src="/assets/chunks/metadata.28960795.js"></script>
+    <script type="module" src="/assets/app.Bri9nZpA.js"></script>
     <link rel="preload" href="/assets/inter-roman-latin.Cy4MYw_J.woff2" as="font" type="font/woff2" crossorigin="">
-    <link rel="modulepreload" href="/assets/chunks/theme.B1uNNMqp.js">
-    <link rel="modulepreload" href="/assets/chunks/framework.vRQslyNc.js">
-    <link rel="modulepreload" href="/assets/articles_blog_vitepress_vitepress-components-guide.md.CwwWL9i4.lean.js">
+    <link rel="modulepreload" href="/assets/chunks/theme.WxwLfXNJ.js">
+    <link rel="modulepreload" href="/assets/chunks/framework.Beq2cAdv.js">
+    <link rel="modulepreload" href="/assets/articles_blog_vitepress_vitepress-components-guide.md.DA6A05pP.lean.js">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0JCR76S5MY"></script>
     <script async src="http://data.zz.baidu.com/urls?site=https://blog.crudclass.com&amp;token=XUzEhKtFTENdiO54"></script>
@@ -190,12 +190,12 @@
 <span class="line"></span>
 <span class="line"><span style="--shiki-light:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold;"># 文章列表</span></span>
 <span class="line"></span>
-<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">ArticleCard</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> </span></span>
-<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  :post</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;{ </span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">    url: &#39;/articles/demo&#39;, </span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">    title: &#39;示例文章&#39;,</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">    frontmatter: { tag: [&#39;Vue&#39;] }</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  }&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> </span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;ArticleCard </span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  :post=&quot;{ </span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    url: &#39;/articles/demo&#39;, </span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    title: &#39;示例文章&#39;,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    frontmatter: { tag: [</span><span style="--shiki-light:#032F62;--shiki-light-text-decoration:underline;--shiki-dark:#DBEDFF;--shiki-dark-text-decoration:underline;">&#39;Vue&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">] }</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  }&quot; </span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/&gt;</span></span></code></pre></div><h3 id="嵌套组件" tabindex="-1">嵌套组件 <a class="header-anchor" href="#嵌套组件" aria-label="Permalink to “嵌套组件”">​</a></h3><p>嵌套在 <code>components/small/</code> 目录下的组件：</p><div class="language-vue"><button title="Copy Code" class="copy"></button><span class="lang">vue</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">&lt;!-- .vitepress/theme/components/small/Icon.vue --&gt;</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">template</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&gt;</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">span</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> class</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;icon&quot;</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> :style</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;{ color: color }&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&gt;</span></span>
