@@ -1,0 +1,1 @@
+var e=`/assets/pixelme.fq84Zezv.png`;export{e as t};
